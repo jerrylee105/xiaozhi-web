@@ -191,7 +191,7 @@ class App {
     const activation = new ActivationManager(this.device, this.ota, {
       onStatus: (msg) => { this.$.activationStatus.textContent = msg; },
       onCode: (code, msg) => {
-        this.$.codeDisplay.textContent = code.split('').join(' ');
+        this.$.codeDisplay.textContent = code;
         this.$.activationStatus.textContent = msg;
       },
       onError: (msg) => { this.$.activationStatus.textContent = `❌ ${msg}`; },
