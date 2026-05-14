@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>KDC Digibot</title>
+  <meta name="description" content="KDC Digibot — Web Client">
+  <link rel="icon" href="assets/emojis/neutral.gif" type="image/gif">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ─── Activation View ─── -->
+    <div id="activation-view" class="view">
+      <div class="activation-card">
+        <div class="activation-icon">🤖</div>
+        <h1>KDC Digibot</h1>
+        <p>Ứng dụng chưa được liên kết. Vui lòng nhập mã bên dưới vào hệ thống quản lý để kích hoạt thiết bị.</p>
+        <div id="code-display" class="code-display">— — — —</div>
+        <p id="activation-status" class="activation-status">Đang kết nối...</p>
+        <button id="retry-btn" class="btn btn-secondary" onclick="location.reload()">Thử lại</button>
+      </div>
+    </div>
+
+    <!-- ─── Main View ─── -->
+    <div id="main-view" class="view hidden">
+
+      <!-- Header -->
+      <header class="header">
+        <h1>🤖 KDC Digibot</h1>
+        <div class="header-right">
+          <div id="status-text" class="status-text status-idle">Đang chờ</div>
+          <button id="settings-btn" class="btn-icon-only" title="Cài đặt">⚙️</button>
+        </div>
+      </header>
+
+      <!-- Emotion Display -->
+      <div class="emotion-container">
+        <img id="emotion-img" src="assets/emojis/neutral.gif" alt="neutral" class="emotion-img">
+      </div>
+
+      <!-- Chat Log -->
+      <div id="chat-log" class="chat-log"></div>
+
+      <!-- Text Input -->
+      <div class="input-row">
+        <input id="text-input" type="text" placeholder="Nhập tin nhắn..." class="text-input" autocomplete="off">
+        <button id="send-btn" class="btn-send" title="Gửi">➤</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button id="talk-btn" class="btn btn-talk" title="Nhấn giữ để nói">
+          <span class="btn-icon">🎤</span>
+          <span class="btn-label">Nhấn giữ để nói</span>
+        </button>
+        <button id="stop-btn" class="btn btn-stop" title="Dừng" disabled>
+          <span class="btn-icon">⏹</span>
+          <span class="btn-label">Dừng</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── Settings View ─── -->
+    <div id="settings-view" class="view hidden">
+      <header class="header">
+        <h1>⚙️ Cài đặt</h1>
+        <button id="close-settings-btn" class="btn-icon-only" title="Đóng">❌</button>
+      </header>
+      
+      <div class="settings-content">
+        <!-- Emoji Mapping -->
+        <section class="settings-section">
+          <h2>Thiết lập Biểu cảm</h2>
+          <p class="settings-desc">Kéo và thả hình ảnh từ kho bên dưới vào ô trạng thái tương ứng.</p>
+          
+          <div class="emoji-pool" id="emoji-pool">
+            <img src="assets/emojis/neutral.gif" draggable="true" data-name="neutral" class="emoji-draggable" alt="neutral" title="neutral">
+            <img src="assets/emojis/happy.gif" draggable="true" data-name="happy" class="emoji-draggable" alt="happy" title="happy">
+            <img src="assets/emojis/sad.gif" draggable="true" data-name="sad" class="emoji-draggable" alt="sad" title="sad">
+            <img src="assets/emojis/angry.gif" draggable="true" data-name="angry" class="emoji-draggable" alt="angry" title="angry">
+            <img src="assets/emojis/shocked.gif" draggable="true" data-name="shocked" class="emoji-draggable" alt="shocked" title="shocked">
+          </div>
+
+          <div class="emoji-mapping-list">
+            <div class="mapping-row">
+              <label>Bình thường (neutral)</label>
+              <div class="emoji-slot" id="emoji-neutral" data-state="neutral" data-mapped="neutral"></div>
+            </div>
+            <div class="mapping-row">
+              <label>Vui vẻ (happy)</label>
+              <div class="emoji-slot" id="emoji-happy" data-state="happy" data-mapped="happy"></div>
+            </div>
+            <div class="mapping-row">
+              <label>Buồn (sad)</label>
+              <div class="emoji-slot" id="emoji-sad" data-state="sad" data-mapped="sad"></div>
+            </div>
+            <div class="mapping-row">
+              <label>Tức giận (angry)</label>
+              <div class="emoji-slot" id="emoji-angry" data-state="angry" data-mapped="angry"></div>
+            </div>
+            <div class="mapping-row">
+              <label>Bất ngờ (shocked)</label>
+              <div class="emoji-slot" id="emoji-shocked" data-state="shocked" data-mapped="shocked"></div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button id="reset-emoji-btn" class="btn-secondary btn-danger-outline" style="flex: 1;">Mặc định</button>
+            <button id="save-emoji-btn" class="btn-secondary" style="flex: 2;">Lưu Biểu cảm</button>
+          </div>
+        </section>
+
+        <!-- Debug Info -->
+        <section class="settings-section">
+          <h2>Thông tin thiết bị</h2>
+          <pre id="debug-info" class="debug-panel-content">Loading...</pre>
+          <button id="reset-btn" class="btn-secondary btn-danger-outline" style="width:100%; margin-top: 15px;">🗑 Reset thiết bị & kích hoạt lại</button>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "xiaozhi-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "XiaoZhi AI Voice Assistant — Web Client",
+  "scripts": {
+    "dev": "npx serve public -l 3000"
+  }
+}
