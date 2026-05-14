@@ -162,11 +162,20 @@ class App {
   }
 
   _resetEmojiMapping() {
-    if (confirm('Khôi phục biểu cảm về mặc định?')) {
+    if (this._emojiConfirmState) {
       EMOTIONS = { ...DEFAULT_EMOTIONS };
       localStorage.removeItem('xiaozhi_emotions');
       this._initSettings();
       alert('Đã khôi phục!');
+      this._emojiConfirmState = false;
+      this.$.resetEmojiBtn.textContent = 'Mặc định';
+    } else {
+      this._emojiConfirmState = true;
+      this.$.resetEmojiBtn.textContent = 'Bấm xác nhận';
+      setTimeout(() => {
+        this._emojiConfirmState = false;
+        this.$.resetEmojiBtn.textContent = 'Mặc định';
+      }, 3000);
     }
   }
 
@@ -396,9 +405,17 @@ class App {
   }
 
   _resetDevice() {
-    if (confirm('Xóa toàn bộ dữ liệu thiết bị và kích hoạt lại?')) {
+    if (this._resetConfirmState) {
       this.device.reset();
       location.reload();
+    } else {
+      this._resetConfirmState = true;
+      const originalText = this.$.resetBtn.textContent;
+      this.$.resetBtn.textContent = 'Bấm lần nữa để XÓA';
+      setTimeout(() => {
+        this._resetConfirmState = false;
+        this.$.resetBtn.textContent = originalText;
+      }, 3000);
     }
   }
 

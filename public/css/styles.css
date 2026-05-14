@@ -133,10 +133,10 @@ body {
 }
 
 .code-display {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: 16px;
-  text-indent: 16px; /* Offset the extra letter-spacing on the right */
+  letter-spacing: 10px;
+  padding-left: 10px; /* Offset the extra letter-spacing on the right */
   color: var(--text);
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border-highlight);
